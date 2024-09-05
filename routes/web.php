@@ -1,6 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenjualanController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', [HomeController::class,'home']);
+Route::prefix('category')->group(function (){
+    Route::get('/food_beverages', [ProductsController::class,'food_beverages']);
+    Route::get('/beauty_health', [ProductsController::class,'beauty_health']);
+    Route::get('/home_care', [ProductsController::class,'home_care']);
+    Route::get('/baby_kid', [ProductsController::class,'baby_kid']);
 });
+Route::get('/user/{id}/name/{name}', [UserController::class,'user']);
+Route::get('/penjualan', [PenjualanController::class,'penjualan']);
+
+
